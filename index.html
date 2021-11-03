@@ -28,9 +28,16 @@
             </div>
         </section>
         <img src="images/dice-5.png" alt="Playing dice" class="dice" />
-        <button class="btn btn--new">🔄 New game</button>
         <button class="btn btn--roll">🎲 Roll dice</button>
         <button class="btn btn--hold">📥 Hold</button>
+        <div class="modal hidden">
+            <h1>Player <span class="winner">1</span> Wins 🥳🎉</h1>
+            <p>
+                <button class="btn btn--new">🔄 New game</button>
+                <button class="btn btn--close"> <a href="ThankYou.html">❌ Close game</a> </button>
+            </p>
+        </div>
+        <div class="overlay hidden"></div>
     </main>
     <script src="script.js"></script>
 </body>

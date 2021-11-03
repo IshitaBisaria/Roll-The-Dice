@@ -12,9 +12,25 @@ const diceEl = document.querySelector(`.dice`);
 const btnNew = document.querySelector(`.btn--new`);
 const btnRoll = document.querySelector(`.btn--roll`);
 const btnHold = document.querySelector(`.btn--hold`);
+const btnClose = document.querySelector(`btn--close`);
+const modal = document.querySelector(`.modal`);
+const overlay = document.querySelector(`.overlay`);
+const btnCloseModal = document.querySelector(`.close-modal`);
+const winnerPlayer = document.querySelector(`.winner`);
 
 // State variables
 let scores, currentScore, activePlayer, playing;
+
+const openModal = function() {
+    modal.classList.remove(`hidden`);
+    // modal.style.display = `block`;  --> same as the above line of code
+    overlay.classList.remove(`hidden`);
+}
+
+const closeModal = function() {
+    modal.classList.add(`hidden`);
+    overlay.classList.add('hidden');
+}
 
 // Initial Conditions of the Game
 const init = function() {
@@ -33,6 +49,7 @@ const init = function() {
     player1El.classList.remove(`player--winner`);
     player0El.classList.add(`player--active`);
     player1El.classList.remove(`player--active`);
+    closeModal();
 };
 
 init();
@@ -87,6 +104,8 @@ btnHold.addEventListener('click', function() {
             document.querySelector(`.player--${activePlayer}`).classList.add('player--winner');
             document.querySelector(`.player--${activePlayer}`).classList.remove('player--active');
             diceEl.classList.add(`hidden`);
+            openModal();
+            winnerPlayer.textContent = `${activePlayer + 1}`;
         } else {
             // Switch the player
             swicthPlayer();
@@ -94,6 +113,14 @@ btnHold.addEventListener('click', function() {
     }
 });
 
+
+
+
+overlay.addEventListener(`click`, closeModal);
+document.addEventListener(`keydown`, function(e) {
+    if(e.key === `Escape` && !modal.classList.contains(`hidden`))
+        closeModal();
+});
 
 
 
