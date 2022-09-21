@@ -107,7 +107,7 @@ btnHold.addEventListener('click', function () {
             winnerPlayer.textContent = `${activePlayer + 1}`;
         } else {
             // Switch the player
-            swicthPlayer();
+            switchPlayer();
         }
     }
 });
