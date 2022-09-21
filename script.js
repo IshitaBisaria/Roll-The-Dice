@@ -15,25 +15,24 @@ const btnHold = document.querySelector(`.btn--hold`);
 const btnClose = document.querySelector(`btn--close`);
 const modal = document.querySelector(`.modal`);
 const overlay = document.querySelector(`.overlay`);
-const btnCloseModal = document.querySelector(`.close-modal`);
 const winnerPlayer = document.querySelector(`.winner`);
 
 // State variables
 let scores, currentScore, activePlayer, playing;
 
-const openModal = function() {
+const openModal = function () {
     modal.classList.remove(`hidden`);
     // modal.style.display = `block`;  --> same as the above line of code
     overlay.classList.remove(`hidden`);
 }
 
-const closeModal = function() {
+const closeModal = function () {
     modal.classList.add(`hidden`);
     overlay.classList.add('hidden');
 }
 
 // Initial Conditions of the Game
-const init = function() {
+const init = function () {
     scores = [0, 0];
     currentScore = 0;
     activePlayer = 0;
@@ -55,7 +54,7 @@ const init = function() {
 init();
 
 // Switching the Player
-const swicthPlayer = function() {
+const switchPlayer = function () {
     document.getElementById(`current--${activePlayer}`).textContent = 0;
     currentScore = 0;
     activePlayer = activePlayer === 1 ? 0 : 1;
@@ -65,24 +64,24 @@ const swicthPlayer = function() {
 
 
 // Rolling dice functionality
-btnRoll.addEventListener(`click`, function() {
-    if(playing) {
+btnRoll.addEventListener(`click`, function () {
+    if (playing) {
         // 1. Generating a Random dice roll
-        const dice = Math.trunc(Math.random()*6)+1;
+        const dice = Math.trunc(Math.random() * 6) + 1;
 
         // 2. Display dice
         diceEl.classList.remove(`hidden`);
         diceEl.src = `images/dice-${dice}.png`;
 
         // 3. Check for rolled 1
-        if(dice !== 1) {
+        if (dice !== 1) {
             // Add dice  to the current score
-                currentScore += dice;
+            currentScore += dice;
             document.getElementById(`current--${activePlayer}`).textContent = currentScore;
         }
         else {
             // Switch to next player
-            swicthPlayer();
+            switchPlayer();
         }
     }
 });
@@ -91,14 +90,14 @@ btnRoll.addEventListener(`click`, function() {
 
 
 // Holding the Score functinality
-btnHold.addEventListener('click', function() {
-    if(playing) {
+btnHold.addEventListener('click', function () {
+    if (playing) {
         // 1. Add Current score to the score of the active player
         scores[activePlayer] += currentScore;
         document.getElementById(`score--${activePlayer}`).textContent = scores[activePlayer];
 
         // Check if player's score is already at least 100
-        if(scores[activePlayer] >= 100) {
+        if (scores[activePlayer] >= 100) {
             // Finish the game
             playing = false;
             document.querySelector(`.player--${activePlayer}`).classList.add('player--winner');
@@ -117,8 +116,8 @@ btnHold.addEventListener('click', function() {
 
 
 overlay.addEventListener(`click`, closeModal);
-document.addEventListener(`keydown`, function(e) {
-    if(e.key === `Escape` && !modal.classList.contains(`hidden`))
+document.addEventListener(`keydown`, function (e) {
+    if (e.key === `Escape` && !modal.classList.contains(`hidden`))
         closeModal();
 });
 
